@@ -11,7 +11,7 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = google_credentials
 client = vision.ImageAnnotatorClient()
 
 
-def detect_labels(image_path):
+def detect_labelsWithPath(image_path):
     """Detects labels in an image."""
 
     # Load the image into memory
@@ -23,14 +23,42 @@ def detect_labels(image_path):
     response = client.label_detection(image=image)
     labels = response.label_annotations
 
-    print("Labels:")
-    for label in labels:
-        print(label.description)
-
     if response.error.message:
         raise Exception(f"{response.error.message}")
 
+    # Extract and return label descriptions and scores
+    label_data = [
+        {"description": label.description, "score": label.score} for label in labels
+    ]
+    return label_data
 
-# Path to your image
-image_path = "test_images/lung.png"
-detect_labels(image_path)
+
+def detect_labelsWithImage(file_content):
+    """Detects labels in an image from file content."""
+
+    # Create an image object from file content
+    image = vision.Image(content=file_content)
+
+    # Perform label detection on the image file
+    response = client.label_detection(image=image)
+    labels = response.label_annotations
+
+    # Check for errors in the response
+    if response.error.message:
+        raise Exception(f"Error from Google Vision API: {response.error.message}")
+
+    # Extract and return label descriptions and scores
+    label_data = [
+        {"description": label.description, "score": label.score} for label in labels
+    ]
+    return label_data
+
+
+# Example usage
+if __name__ == "__main__":
+    # Path to your image
+    image_path = "test_images/lung.png"
+    labels = detect_labelsWithPath(image_path)
+    print("Labels:")
+    for label in labels:
+        print(label)
