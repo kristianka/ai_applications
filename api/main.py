@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 from gc_vision import detect_labelsWithImage
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": ["http://localhost:5173"]}})
 
 
 @app.route("/", methods=["GET"])
@@ -25,6 +27,7 @@ def upload_file():
         try:
             # return the labels detected in the image
             labels = detect_labelsWithImage(file_contents)
+            print("Successfully detected labels in the image")
             return jsonify({"labels": labels}), 200
         except Exception as e:
             return jsonify({"message": str(e)}), 500
