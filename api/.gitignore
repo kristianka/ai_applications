@@ -1,2 +1,5 @@
 env.json
 .env
+
+# remove later after finalizing test images
+test_images/
