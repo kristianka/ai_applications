@@ -27,7 +27,6 @@ export function FileUpload(props: Partial<DropzoneProps>) {
             });
             if (response.ok) {
                 const data = await response.json();
-                console.log(data);
                 setData(data);
                 setLoading(false);
             }
