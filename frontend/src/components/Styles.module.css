@@ -7,3 +7,17 @@
         color: light-dark(var(--mantine-color-gray-5), var(--mantine-color-dark-3));
     }
 }
+
+.dark-theme-dropzone {
+    background-color: #2e3440;
+    color: #d8dee9;
+    border: 2px dashed #4c566a;
+}
+
+.dark-theme-dropzone:hover {
+    background-color: #3b4252;
+}
+
+.dark-theme-dropzone .mantine-Text-root {
+    color: #d8dee9;
+}

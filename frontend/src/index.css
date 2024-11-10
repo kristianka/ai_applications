@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.dark-theme-dropzone {
+    background-color: black !important;
+    color: #d8dee9 !important;
+    border: 1px #4c566a !important;
+}
+
+.dark-theme-dropzone:hover {
+    background-color: #121212 !important;
+}
+
+.dark-theme-dropzone .mantine-Text-root {
+    color: #c1c1c1;
+}
+
+.dark-theme-dropzone:disabled {
+    background-color: #151515 !important;
+    color: #2e2e2e !important;
+    border-color: #494949 !important;
+    pointer-events: none;
+}
